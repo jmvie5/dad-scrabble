@@ -1,14 +1,15 @@
 import copy
 
 class Board:
-    def __init__(self, size=28):
+    def __init__(self, t):
 
-        self.size = size
+        self.size = 28
         self.available_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         self.letters_on_board = []
         # Initialize the board with empty spaces (' ')
-        self.grid = [[' ' for _ in range(size)] for _ in range(size)]
+        self.grid = [[' ' for _ in range(28)] for _ in range(28)]
         self.word_count = 0
+        self.t = t
 
 
     def __str__(self):

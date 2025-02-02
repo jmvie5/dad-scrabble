@@ -1,11 +1,21 @@
 from Board import Board, DadScrabbleError
+from translations import translations
 
 def main():
-    board = Board(15)
-    print("Welcome to Dad Scrabble! Enjoy the game!\nType !exit to end the game.\nEnter your first word: ")
+    
+    lng_opt = ["fr", "en"]
+    lng = ""
+    while lng not in lng_opt:
+        lng = input("Pour jouer en français, tapez \"fr\". To play in english, enter \"en\".\n")
+
+    t = translations[lng]
+    print(t["Welcome to Dad Scrabble!\nType !exit to end the game.\nEnter your first word: "])
 
     game_over = False
     valid_char = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    
+    board = Board(t)
+    
     while not game_over:
         word = input().upper()
 
