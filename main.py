@@ -9,7 +9,7 @@ def main():
         lng = input("Pour jouer en français, tapez \"fr\". To play in english, enter \"en\".\n")
 
     t = translations[lng]
-    print(t["Welcome to Dad Scrabble!\nType !exit to end the game.\nEnter your first word: "])
+    print(t["Welcome to Dad Scrabble!\nType :q to end the game.\nEnter your first word: "])
 
     game_over = False
     valid_char = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -19,7 +19,7 @@ def main():
     while not game_over:
         word = input().upper()
 
-        if word == t["!EXIT"]:
+        if word == ":Q":
             game_over = True
             continue
 

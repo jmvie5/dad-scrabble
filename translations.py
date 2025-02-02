@@ -3,8 +3,7 @@
 
 translations = {
     "fr": {
-        "!EXIT": "!QUITTER",
-        "Welcome to Dad Scrabble!\nType !exit to end the game.\nEnter your first word: ": "Bienvenue au Scrabble de papa !\nTapez !quitter pour terminer le jeu.\nEntrez votre premier mot :",
+        "Welcome to Dad Scrabble!\nType :q to end the game.\nEnter your first word: ": "Bienvenue au Scrabble de papa !\nTapez :q pour terminer le jeu.\nEntrez votre premier mot :",
         "Invalid character detected. Please enter a valid word." : "Caractère invalide détecté. Veuillez entrer un mot valide.",
         "Available letters: ": "Les lettres disponibles :",
         "Enter your next word: ": "Entrez votre prochain mot :",
@@ -25,8 +24,7 @@ translations = {
 
     "en" : {
         "Invalid character detected. Please enter a valid word.": "Invalid character detected. Please enter a valid word.",
-        "!EXIT": "!QUIT",
-        "Welcome to Dad Scrabble!\nType !exit to end the game.\nEnter your first word: ": "Welcome to Dad Scrabble!\nType !exit to end the game.\nEnter your first word: ",
+        "Welcome to Dad Scrabble!\nType :q to end the game.\nEnter your first word: ": "Welcome to Dad Scrabble!\nType: :q to end the game.\nEnter your first word: ",
         "Available letters: ": "Available letters :",
         "Enter your next word: ": "Enter your next word :",
         "Game over! Your final score is ": "Game over! Your final score is ",
