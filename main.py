@@ -5,11 +5,23 @@ def main():
     print("Welcome to Dad Scrabble! Enjoy the game!\nType !exit to end the game.\nEnter your first word: ")
 
     game_over = False
+    valid_char = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     while not game_over:
         word = input().upper()
 
         if word == "!EXIT":
             game_over = True
+            continue
+
+        # Check if the word contains only valid characters
+        try:
+            for char in word:
+                if char not in valid_char:
+                    raise ValueError("Invalid character detected. Please enter a valid word.")
+
+        except ValueError as e:
+            print(e)
+            print(f"Available letters: {board.available_letters}\nEnter your next word: ")
             continue
         
         try:
