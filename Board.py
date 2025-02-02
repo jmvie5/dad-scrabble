@@ -1,3 +1,5 @@
+import copy
+
 class Board:
     def __init__(self, size=28):
 
@@ -23,10 +25,28 @@ class Board:
     def add_word(self, word):
         word_is_valid, message = self.is_valid_word(word)
         if not word_is_valid:
-            raise ValueError(f"Invalid word : {message}")
+            raise DadScrabbleError(f"Invalid word : {message}")
 
         start_x, start_y, direction = self.get_word_position(word)
-       
+
+        # Place letters on a temp board for test
+        temp_board = copy.deepcopy(self)
+        for i, letter in enumerate(word):
+            
+            if direction == 'horizontal':
+                temp_board.place_tile(start_x + i, start_y, letter)
+            elif direction == 'vertical':
+                temp_board.place_tile(start_x, start_y + i, letter)
+            else:
+                raise ValueError("Invalid direction. Need to be either 'horizontal' or 'vertical'.")
+        
+        # Validate board before adding the word for real
+        is_board_valid, message = temp_board.validate_board()
+
+        if not is_board_valid:
+            raise DadScrabbleError(f"Invalid board : {message}")
+        
+            
         # Place each letter of the word on the board
         for i, letter in enumerate(word):
             
@@ -35,19 +55,9 @@ class Board:
             elif direction == 'vertical':
                 self.place_tile(start_x, start_y + i, letter)
             else:
-                raise ValueError("Invalid direction. Use 'horizontal' or 'vertical'.")
+                raise ValueError("Invalid direction. Need to be either 'horizontal' or 'vertical'.")
             
-            
-
-        # Validate board before adding the word for real
-        is_board_valid, message = self.validate_board()
-
-        if not is_board_valid:
-            raise ValueError(f"Invalid board : {message}")
-        
-        
-        for letter in word:
-            # Add played letters to letter on board
+             # Add played letters to letters on board
             if letter not in self.letters_on_board:
                 self.letters_on_board.append(letter)
             
@@ -55,7 +65,6 @@ class Board:
             if letter in self.available_letters:
                 self.available_letters.remove(letter)
         
-    
         self.word_count += 1
         
 
@@ -72,7 +81,7 @@ class Board:
         # If words on the board, we need to check where the word is crossing and what direction the new word is going to be
         common_letter = (set(word) & set(self.letters_on_board)).pop()
         if not common_letter:
-            raise ValueError("A new word needs one common letter to be placed.")
+            raise DadScrabbleError("A new word needs one common letter to be placed.")
         
         # Find position of common_letter
         start_x, start_y = self.get_letter_position_in_board(common_letter)
@@ -83,7 +92,7 @@ class Board:
         elif self.grid[start_y-1][start_x] == " " and self.grid[start_y+1][start_x] == " ":
             direction = "vertical"
         else:
-            raise ValueError("Can't place this word, conflict with other letters.")
+            raise DadScrabbleError("Can't place this word, conflict with other letters.")
         
         if direction == "horizontal":
             start_x -= word.index(common_letter)
@@ -140,3 +149,10 @@ class Board:
     def get_score(self):
         # TODO implement real scrabble score per letter and return total score for the used letters
         return len(self.letters_on_board)
+
+
+class DadScrabbleError(Exception):
+    '''DadScrabbleError 
+
+    This error is raised when a word cannot be placed on the board due to invalid common letters or repeated letters.
+    '''

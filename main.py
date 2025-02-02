@@ -1,4 +1,4 @@
-from Board import Board
+from Board import Board, DadScrabbleError
 
 def main():
     board = Board(15)
@@ -12,7 +12,12 @@ def main():
             game_over = True
             continue
         
-        board.add_word(word)
+        try:
+            board.add_word(word)
+        except DadScrabbleError as e:
+            print(e)
+            print(f"Available letters: {board.available_letters}\nEnter your next word: ")
+            continue
 
         print(board)
 
