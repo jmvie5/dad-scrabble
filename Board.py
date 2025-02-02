@@ -26,7 +26,7 @@ class Board:
     def add_word(self, word):
         word_is_valid, message = self.is_valid_word(word)
         if not word_is_valid:
-            raise DadScrabbleError(f"Invalid word : {message}")
+            raise DadScrabbleError(f"{self.t['Invalid word : ']}{message}")
 
         start_x, start_y, direction = self.get_word_position(word)
 
@@ -45,7 +45,7 @@ class Board:
         is_board_valid, message = temp_board.validate_board()
 
         if not is_board_valid:
-            raise DadScrabbleError(f"Invalid board : {message}")
+            raise DadScrabbleError(f"{self.t['Invalid board : ']}{message}")
         
             
         # Place each letter of the word on the board
@@ -82,7 +82,7 @@ class Board:
         # If words on the board, we need to check where the word is crossing and what direction the new word is going to be
         common_letter = (set(word) & set(self.letters_on_board)).pop()
         if not common_letter:
-            raise DadScrabbleError("A new word needs one common letter to be placed.")
+            raise DadScrabbleError(self.t["A new word needs one common letter to be placed."])
         
         # Find position of common_letter
         start_x, start_y = self.get_letter_position_in_board(common_letter)
@@ -93,7 +93,7 @@ class Board:
         elif self.grid[start_y-1][start_x] == " " and self.grid[start_y+1][start_x] == " ":
             direction = "vertical"
         else:
-            raise DadScrabbleError("Can't place this word, conflict with other letters.")
+            raise DadScrabbleError(self.t["Can't place this word, conflict with other letters."])
         
         if direction == "horizontal":
             start_x -= word.index(common_letter)
@@ -117,16 +117,16 @@ class Board:
         # If word has the same letter twice, it's not valid
         for i in range(len(word)):
             if word[i] in word[:i]:
-                return False, "Can't have the same letter twice in the same word."
+                return False, self.t["Can't place this word, conflict with other letters."]
 
         common_letter = set(word) & set(self.letters_on_board)
         # If board is not empty and there is no common letter with the word and the board, it's not a valid word
         if self.word_count != 0 and len(common_letter) == 0:
-            return False, "Your word has no common letters with words on the board."
+            return False, self.t["Your word has no common letters with words on the board."]
             
         # We check if the same letter is used twice on the board after placing the word on. 
         
-        return True, "Word is valid"
+        return True, self.t["Word is valid"]
     
 
     def validate_board(self):
@@ -142,9 +142,9 @@ class Board:
             if letter not in count_list:
                 count_list.append(letter)
             elif letter in count_list:
-                return False, "You have repeated letters on the board."
+                return False, self.t["You have repeated letters on the board."]
             
-        return True, "Board is valid"
+        return True, self.t["Board is valid"]
         
     
     def get_score(self):

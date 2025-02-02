@@ -19,7 +19,7 @@ def main():
     while not game_over:
         word = input().upper()
 
-        if word == "!EXIT":
+        if word == t["!EXIT"]:
             game_over = True
             continue
 
@@ -27,18 +27,18 @@ def main():
         try:
             for char in word:
                 if char not in valid_char:
-                    raise ValueError("Invalid character detected. Please enter a valid word.")
+                    raise ValueError(t["Invalid character detected. Please enter a valid word."])
 
         except ValueError as e:
             print(e)
-            print(f"Available letters: {board.available_letters}\nEnter your next word: ")
+            print(f"{t['Available letters: ']}{board.available_letters}\n{t['Enter your next word: ']}")
             continue
         
         try:
             board.add_word(word)
         except DadScrabbleError as e:
             print(e)
-            print(f"Available letters: {board.available_letters}\nEnter your next word: ")
+            print(f"{t['Available letters: ']}{board.available_letters}\n{t['Enter your next word: ']}")
             continue
 
         print(board)
@@ -47,9 +47,9 @@ def main():
             game_over = True
             continue
 
-        print(f"Available letters: {board.available_letters}\nEnter your next word: ")
+        print(f"{t['Available letters: ']}{board.available_letters}\n{t['Enter your next word: ']}")
 
-    print(f"Game over! Your final score is {board.get_score()}.")
+    print(f"{t['Game over! Your final score is ']}{board.get_score()}.")
 
 
 if __name__ == "__main__":
