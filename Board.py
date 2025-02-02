@@ -3,11 +3,11 @@ import copy
 class Board:
     def __init__(self, t):
 
-        self.size = 28
+        self.size = 26
         self.available_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         self.letters_on_board = []
         # Initialize the board with empty spaces (' ')
-        self.grid = [[' ' for _ in range(28)] for _ in range(28)]
+        self.grid = [[' ' for _ in range(26)] for _ in range(26)]
         self.word_count = 0
         self.t = t
 
@@ -18,7 +18,10 @@ class Board:
 
     def place_tile(self, x, y, tile):
         if 0 <= x < self.size and 0 <= y < self.size:
-            self.grid[y][x] = tile
+            if self.grid[y][x] == ' ' or self.grid[y][x] == tile:
+                self.grid[y][x] = tile
+            else:
+                raise DadScrabbleError(f"{self.t['No. The letter ']}{tile}{self.t[' would replace the letter ']}{self.grid[y][x]}.")
         else:
             raise ValueError("Invalid coordinates", x, y)
         

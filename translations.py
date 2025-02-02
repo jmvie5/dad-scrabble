@@ -17,7 +17,10 @@ translations = {
         "Your word has no common letters with words on the board." : "Votre mot n'a pas de lettres communes avec les mots sur le plateau.",
         "Word is valid": "Mot valide",
         "You have repeated letters on the board." : "Vous avez des lettres répétées sur le plateau.",
-        "Board is valid" : "Jeu valide"
+        "Board is valid" : "Jeu valide",
+        "Can't replace a letter with another.": "Impossible de remplacer une lettre par une autre.",
+        "No. The letter ": "Non. La lettre ",
+        " would replace the letter ": " remplacerait la lettre ",
     },
 
     "en" : {
@@ -34,7 +37,10 @@ translations = {
         "Your word has no common letters with words on the board.": "Your word has no common letters with words on the board.",
         "Word is valid": "Word is valid",
         "You have repeated letters on the board.": "You have repeated letters on the board.",
-        "Board is valid": "Board is valid"
+        "Board is valid": "Board is valid",
+        "Can't replace a letter with another." : "Can't replace a letter with another.",
+        "No. The letter ": "No. The letter ",
+        " would replace the letter ": " would replace the letter "
     }
     
 }
