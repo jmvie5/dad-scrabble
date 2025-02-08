@@ -151,8 +151,12 @@ class Board:
         
     
     def get_score(self):
-        # TODO implement real scrabble score per letter and return total score for the used letters
-        return len(self.letters_on_board)
+        letter_values = self.t["letter_values"]
+        score = 0
+        for letter in self.letters_on_board:
+            score += letter_values[letter]
+        
+        return score
 
 
 class DadScrabbleError(Exception):
