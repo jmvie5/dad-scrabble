@@ -30,14 +30,14 @@ def main():
                     raise ValueError(t["Invalid character detected. Please enter a valid word."])
 
         except ValueError as e:
-            print(e)
+            print(f"----------\n{e}\n-----------")
             print(f"{t['Available letters: ']}{board.available_letters}\n{t['Enter your next word: ']}")
             continue
         
         try:
             board.add_word(word)
         except DadScrabbleError as e:
-            print(e)
+            print(f"----------\n{e}\n-----------")
             print(f"{t['Available letters: ']}{board.available_letters}\n{t['Enter your next word: ']}")
             continue
 

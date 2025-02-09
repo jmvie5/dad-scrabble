@@ -3,17 +3,17 @@ import copy
 class Board:
     def __init__(self, t):
 
-        self.size = 26
+        self.size = 20
         self.available_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         self.letters_on_board = []
         # Initialize the board with empty spaces (' ')
-        self.grid = [[' ' for _ in range(26)] for _ in range(26)]
+        self.grid = [[' ' for _ in range(self.size)] for _ in range(self.size)]
         self.word_count = 0
         self.t = t
 
 
     def __str__(self):
-        return '\n'.join([' '.join(row) for row in self.grid])
+        return '--'*self.size + '-\n|' + '|\n|'.join([' '.join(row) for row in self.grid]) + '|\n-' + '--'*self.size
     
 
     def place_tile(self, x, y, tile):
@@ -23,7 +23,7 @@ class Board:
             else:
                 raise DadScrabbleError(f"{self.t['No. The letter ']}{tile}{self.t[' would replace the letter ']}{self.grid[y][x]}.")
         else:
-            raise ValueError("Invalid coordinates", x, y)
+            raise DadScrabbleError(self.t["Some letters would be out of bounds."])
         
         
     def add_word(self, word):
@@ -91,12 +91,15 @@ class Board:
         start_x, start_y = self.get_letter_position_in_board(common_letter)
 
         # If no letter at the left and right of common_letter, direction of new word is horizontal, else vertical
-        if self.grid[start_y][start_x-1] == " " and self.grid[start_y][start_x+1] == " ":
-            direction = "horizontal"
-        elif self.grid[start_y-1][start_x] == " " and self.grid[start_y+1][start_x] == " ":
-            direction = "vertical"
-        else:
-            raise DadScrabbleError(self.t["Can't place this word, conflict with other letters."])
+        try:
+            if self.grid[start_y][start_x-1] == " " and self.grid[start_y][start_x+1] == " ":
+                direction = "horizontal"
+            elif self.grid[start_y-1][start_x] == " " and self.grid[start_y+1][start_x] == " ":
+                direction = "vertical"
+            else:
+                raise DadScrabbleError(self.t["Can't place this word, conflict with other letters."])
+        except IndexError:
+            raise DadScrabbleError(self.t["Some letters would be out of bounds."])
         
         if direction == "horizontal":
             start_x -= word.index(common_letter)

@@ -20,6 +20,7 @@ translations = {
         "Can't replace a letter with another.": "Impossible de remplacer une lettre par une autre.",
         "No. The letter ": "Non. La lettre ",
         " would replace the letter ": " remplacerait la lettre ",
+        "Some letters would be out of bounds.": "Certaines lettres seraient hors du plateau.",
         "letter_values" : {
             "A" : 1,
             "B" : 3,
@@ -67,6 +68,7 @@ translations = {
         "Can't replace a letter with another." : "Can't replace a letter with another.",
         "No. The letter ": "No. The letter ",
         " would replace the letter ": " would replace the letter ",
+        "Some letters would be out of bounds." : "Some letters would be out of bounds.",
         "letter_values" : {
             "A" : 1,
             "B" : 3,
